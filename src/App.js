@@ -2,17 +2,18 @@ import React, { useState } from 'react';
 import './elements/App.css';
 import Header from './components/Header';
 import Formulary from './components/Formulary';
+import {v4 as uuidv4} from 'uuid';
 
 function App() {
   const [activities, changeActivities] = useState(
     [
       {
-        id: 1,
+        id: uuidv4(),
         text: 'Lavar Ropa',
         complete: false
       },
       {
-        id: 2,
+        id: uuidv4(),
         text: 'Lavaplatos',
         complete: false
       }

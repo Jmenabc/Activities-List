@@ -1,13 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlusSquare } from '@fortawesome/free-solid-svg-icons';
+import {v4 as uuidv4} from 'uuid';
 
 const Formulary = ({ activities, changeActivities }) => {
+    const [inputActivities, changeActivitiesInput] = useState('');
+
+    const handleInput = (e) => {
+        changeActivitiesInput(e.target.value);
+    }
+    
     const handleSubmit = (e) => {
-        e.preventDefault();
+        e.preventDefault(); //para que cuando pulses el boton no se actualize
 
         changeActivities(
-            'Tareas cambiadas'
+            [
+                ...activities,
+                {
+                    id: uuidv4(),
+                    text: 'Tirar la basura',
+                    complete: false
+                }
+            ]
         );
     }
 
@@ -17,6 +31,8 @@ const Formulary = ({ activities, changeActivities }) => {
                 type='text'
                 className='formulary-activities__input'
                 placeholder='Escribe tus tareas de 1 en 1'
+                value={inputActivities}
+                onChange={(e) => handleInput(e) }
             />
             <button
                 type='submit'
