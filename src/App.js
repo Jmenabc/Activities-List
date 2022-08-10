@@ -1,10 +1,11 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
 import './elements/App.css';
+import Header from './components/Header';
+
 function App() {
   return (
-    <div>
-      <h1>Hola Mundo</h1>
+    <div className='container'>
+        <Header />
     </div>
   );
 }
