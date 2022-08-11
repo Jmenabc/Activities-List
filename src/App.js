@@ -3,6 +3,7 @@ import './elements/App.css';
 import Header from './components/Header';
 import Formulary from './components/Formulary';
 import {v4 as uuidv4} from 'uuid';
+import ActivitieList from './components/ListActivities';
 
 function App() {
   const [activities, changeActivities] = useState(
@@ -27,6 +28,7 @@ function App() {
         activities={activities}
         changeActivities={changeActivities}
       />
+      <ActivitieList activities={activities}/>
     </div>
   );
 }
