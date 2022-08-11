@@ -1,9 +1,9 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckSquare, faEdit, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 const Activities = ({ activities }) => {
-    const [editActivitie, changeEditActivitie] =useState(false);
+    const [editActivitie, changeEditActivitie] = useState(false);
 
     return (
         <li
@@ -15,7 +15,21 @@ const Activities = ({ activities }) => {
             />
 
             <div className='list-activities__txt'>
-                {activities.text}
+                {editActivitie ?
+                    <form action='' className='formulary-edit-activitie'>
+                        <input
+                            type='text'
+                            className='formulary-edit-activitie__input'
+                        />
+                        <button
+                            type='submit'
+                            className='formulary-edit-activitie__btn'
+                        >
+                            Actualizar
+                        </button>
+                    </form> :
+                    activities.text
+                }
             </div>
 
             <div className='list-activities__container-boton'>
