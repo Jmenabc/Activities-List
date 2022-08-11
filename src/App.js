@@ -16,7 +16,7 @@ function App() {
       {
         id: uuidv4(),
         text: 'Lavaplatos',
-        complete: false
+        complete: true
       }
     ]
   );

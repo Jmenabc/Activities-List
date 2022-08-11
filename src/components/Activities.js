@@ -4,6 +4,13 @@ import { faCheckSquare, faEdit, faTimes } from '@fortawesome/free-solid-svg-icon
 
 const Activities = ({ activities }) => {
     const [editActivitie, changeEditActivitie] = useState(false);
+    const [newActivitie, changeNewActivitie] = useState(activities.text);
+    
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        changeEditActivitie(false)
+    }
 
     return (
         <li
@@ -16,10 +23,12 @@ const Activities = ({ activities }) => {
 
             <div className='list-activities__txt'>
                 {editActivitie ?
-                    <form action='' className='formulary-edit-activitie'>
+                    <form action='' onSubmit={handleSubmit} className='formulary-edit-activitie'>
                         <input
                             type='text'
                             className='formulary-edit-activitie__input'
+                            value={newActivitie}
+                            onChange={(e) => changeNewActivitie(e.target.value)}
                         />
                         <button
                             type='submit'
@@ -36,6 +45,7 @@ const Activities = ({ activities }) => {
                 <FontAwesomeIcon
                     icon={faEdit}
                     className='list-activities__icon list-activities__icon-action'
+                    onClick={() => changeEditActivitie(!editActivitie)}
                 />
 
                 <FontAwesomeIcon
