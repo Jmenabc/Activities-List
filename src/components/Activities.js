@@ -2,14 +2,13 @@ import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckSquare, faEdit, faTimes, faSquare } from '@fortawesome/free-solid-svg-icons';
 
-const Activities = ({ activities, toggleComplete, editActivitie, deleteActivitie }) => {
+const Activities = ({ activities, toggleComplete, editActivities, deleteActivitie }) => {
     const [editActivitie, changeEditActivitie] = useState(false);
     const [newActivitie, changeNewActivitie] = useState(activities.text);
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        editActivitie(activities.id, newActivitie);
-
+        editActivities(activities.id, newActivitie);
         changeEditActivitie(false)
     }
 
