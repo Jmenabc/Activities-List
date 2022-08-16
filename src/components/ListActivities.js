@@ -1,7 +1,7 @@
 import React from 'react';
 import Activities from './Activities';
 
-const ActivitieList = ({ activities, changeActivities }) => {
+const ActivitieList = ({ activities, changeActivities, showComplete }) => {
     const toggleComplete = (id) => {
         changeActivities(activities.map((activitie) => {
             if (activitie.id === id) {
@@ -39,13 +39,25 @@ const ActivitieList = ({ activities, changeActivities }) => {
         <ul className='list-activities'>
             {activities.length > 0 ?
                 activities.map((e) => {
-                    return <Activities
-                        key={e.id}
-                        activities={e}
-                        toggleComplete={toggleComplete}
-                        editActivitie={editActivitie}
-                        deleteActivitie={deleteActivitie}
-                    />
+                    if (showComplete) {
+                        return <Activities
+                            key={e.id}
+                            activities={e}
+                            toggleComplete={toggleComplete}
+                            editActivitie={editActivitie}
+                            deleteActivitie={deleteActivitie}
+                        />
+                    } else if (!activities.complete) {
+                        return <Activities
+                            key={e.id}
+                            activities={e}
+                            toggleComplete={toggleComplete}
+                            editActivitie={editActivitie}
+                            deleteActivitie={deleteActivitie}
+                        />
+                    }
+                    return;
+
                 })
                 : <div className='list-activities__msg'>No hay Tareas agregadas</div>
             }
