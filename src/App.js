@@ -1,52 +1,49 @@
-import React, { useState, useEffect } from 'react';
-import './elements/App.css';
-import Header from './components/Header';
-import Formulary from './components/Formulary';
-import ActivitieList from './components/ListActivities';
+import React, {useState, useEffect} from 'react';
+import './App.css';
+import Header from './componentes/Header';
+import FormularioTareas from './componentes/FormularioTareas';
+import ListaTareas from './componentes/ListaTareas';
 
-function App() {
-  //Obtenemos de localStorage las tareas guardadas
-  const activitiesSave =
-    localStorage.getItem('activities') ?
-      JSON.parse(localStorage.getItem('activities')) : [];
+const App = () => {
+  // Obtenemos las tareas guardadas de localstorage.
+  const tareasGuardadas = 
+  localStorage.getItem('tareas') ? 
+  JSON.parse(localStorage.getItem('tareas')) : [];
 
-  //Le damos un estado a las tareas
-  const [activities, changeActivities] = useState(activitiesSave);
+  // Establecemos el estado de las tareas.
+  const [tareas, cambiarTareas] = useState(tareasGuardadas);
 
-  //Guardando el estado en localStorage
+  // Guardando el estado dentro de localstorage
   useEffect(() => {
-    localStorage.setItem('activities', JSON.stringify(activities));
-  }, [activities]);
+    localStorage.setItem('tareas', JSON.stringify(tareas));
+  }, [tareas]);
 
-  //Comprobamos que showCompletes no es null
-  let setShowComplete = '';
-  if (localStorage.getItem('showComplete') === null) {
-    setShowComplete = true;
+  // Accedemos a localstorage y comprobamos si mostrarCompletadas es null
+  let configMostrarCompletadas = '';
+  if(localStorage.getItem('mostrarCompletadas') === null){
+    configMostrarCompletadas = true;
   } else {
-    setShowComplete = localStorage.getItem('showComplete') === 'true';
+    configMostrarCompletadas = localStorage.getItem('mostrarCompletadas') === 'true';
   }
 
-  //Estado para mostrar las tareas completadas
-  const [showComplete, changeShowComplete] = useState(setShowComplete);
+  // El estado de mostrarCompletadas
+  const [mostrarCompletadas, cambiarMostrarCompletadas] = useState(configMostrarCompletadas);
 
   useEffect(() => {
-    localStorage.setItem('showComplete', showComplete.toString());
-  }, [showComplete]);
+    localStorage.setItem('mostrarCompletadas', mostrarCompletadas.toString());
+  }, [mostrarCompletadas]);
 
   return (
-    <div className='container'>
-      <Header
-        showComplete={showComplete}
-        changeShowComplete={changeShowComplete}
+    <div className="contenedor">
+      <Header 
+        mostrarCompletadas={mostrarCompletadas} 
+        cambiarMostrarCompletadas={cambiarMostrarCompletadas}
       />
-      <Formulary
-        activities={activities}
-        changeActivities={changeActivities}
-      />
-      <ActivitieList
-        activities={activities}
-        changeActivities={changeActivities}
-        showComplete={showComplete}
+      <FormularioTareas tareas={tareas} cambiarTareas={cambiarTareas} />
+      <ListaTareas 
+        tareas={tareas}
+        cambiarTareas={cambiarTareas}
+        mostrarCompletadas={mostrarCompletadas}
       />
     </div>
   );
