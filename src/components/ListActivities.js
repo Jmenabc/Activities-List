@@ -13,6 +13,28 @@ const ActivitieList = ({ activities, changeActivities }) => {
         }));
     }
 
+    const editActivitie = (id, newText) => {
+        changeActivities(activities.map((activitie) => {
+            if (activitie.id === id) {
+                return {
+                    ...activitie, text: newText
+                }
+            }
+            return activitie;
+        }));
+    }
+    //FILTER NOS PERMITE DEVOLVER UN ARRAY DONDE TENEMOS ELEMENTOS PERO ALGUNOS NO DEPENDE DEL FILTRO
+    const deleteActivitie = (id) => {
+        changeActivities(activities.filter((activitie) => {
+            if (activitie.id !== id) {
+                return activitie
+            }
+            return;
+        }));
+    }
+
+
+
     return (
         <ul className='list-activities'>
             {activities.length > 0 ?
@@ -21,6 +43,8 @@ const ActivitieList = ({ activities, changeActivities }) => {
                         key={e.id}
                         activities={e}
                         toggleComplete={toggleComplete}
+                        editActivitie={editActivitie}
+                        deleteActivitie={deleteActivitie}
                     />
                 })
                 : <div className='list-activities__msg'>No hay Tareas agregadas</div>

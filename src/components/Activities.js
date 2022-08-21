@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckSquare, faEdit, faTimes, faSquare } from '@fortawesome/free-solid-svg-icons';
 
-const Activities = ({ activities, toggleComplete }) => {
+const Activities = ({ activities, toggleComplete, editActivitie, deleteActivitie }) => {
     const [editActivitie, changeEditActivitie] = useState(false);
     const [newActivitie, changeNewActivitie] = useState(activities.text);
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        editActivitie(activities.id, newActivitie);
 
         changeEditActivitie(false)
     }
@@ -54,6 +55,7 @@ const Activities = ({ activities, toggleComplete }) => {
                 <FontAwesomeIcon
                     icon={faTimes}
                     className='list-activities__icon list-activities__icon-action'
+                    onClick={() => deleteActivitie(activities.id)}
                 />
 
             </div>
