@@ -28,7 +28,7 @@ function App() {
         activities={activities}
         changeActivities={changeActivities}
       />
-      <ActivitieList activities={activities}/>
+      <ActivitieList activities={activities} changeActivities={changeActivities}/>
     </div>
   );
 }

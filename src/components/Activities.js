@@ -1,24 +1,27 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheckSquare, faEdit, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faCheckSquare, faEdit, faTimes, faSquare } from '@fortawesome/free-solid-svg-icons';
 
-const Activities = ({ activities }) => {
+const Activities = ({ activities, toggleComplete }) => {
     const [editActivitie, changeEditActivitie] = useState(false);
     const [newActivitie, changeNewActivitie] = useState(activities.text);
-    
+
     const handleSubmit = (e) => {
         e.preventDefault();
 
         changeEditActivitie(false)
     }
 
+
     return (
         <li
             className='list-activities__activitie'
         >
             <FontAwesomeIcon
-                icon={faCheckSquare}
+                icon={activities.complete ?
+                    faCheckSquare : faSquare}
                 className='list-activities__icon list-activities__icon-check'
+                onClick={() => toggleComplete(activities.id)}
             />
 
             <div className='list-activities__txt'>
